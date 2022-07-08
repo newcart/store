@@ -6,10 +6,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.connectMicroservice({
     transport: Transport.TCP,
-    options: { host:'0.0.0.0', port: 30201 },
+    options: { host:'0.0.0.0', port: process.env.PORT },
   });
   await app.startAllMicroservices();
-  console.log('Store Service is runing on 30201.');
+  console.log('Store Service is runing on ' + process.env.PORT);
 }
 bootstrap();
 
