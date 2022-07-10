@@ -21,7 +21,7 @@ import { DbEntity } from './db/entities/db.entity'
             entities  : [DbEntity],
             autoLoadEntities: true,
             synchronize: true,
-            retryDelay:1
+            retryDelay :1
         }),
     ],
     controllers: [ AppController ],
