@@ -3,6 +3,8 @@ import {Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from
 
 export class CreateDbDto {
     @IsNumber()
+    readonly store_id: number;
+    @IsNumber()
     readonly store_code: number;
     @IsString()
     readonly store_name: string;
@@ -12,6 +14,8 @@ export class CreateDbDto {
     readonly town_id: number;
     @IsNumber()
     readonly city_id: number;
+    @IsNumber()
+    readonly country_id: number;
     @IsString()
     readonly tax_number: string;
     @IsString()

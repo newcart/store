@@ -15,6 +15,8 @@ export class DbEntity {
     @Column({nullable:true})
     city_id: number;
     @Column({nullable:true})
+    country_id: number;
+    @Column({nullable:true})
     tax_number: string;
     @Column({nullable:true})
     tax_office: string;

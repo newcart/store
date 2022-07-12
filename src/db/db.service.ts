@@ -18,7 +18,7 @@ export class DbService {
     }
 
     async info(data){
-        const id = data['id']
+        const id = data['store_id']
         const store = await this.findStoreById (id)
 
         var message = '';
@@ -32,7 +32,7 @@ export class DbService {
     async list (data){
         const page = data['page']
         const limit = data['limit']
-        const offset = page * limit
+        const offset = Math.max(0, page-1) * limit
         const [items, count] = await this.dbRepository.findAndCount({
             order: {
                 store_id: 'ASC'
@@ -47,10 +47,15 @@ export class DbService {
         var status = 'failure';
         var message = '';
         try {
+            const old_store_id = store.store_id
             store = await this.dbRepository.save(store)
             if(store){
                 status = 'success';
-                message = 'Mağaza Eklendi';
+                if(old_store_id==store.store_id){
+                    message = 'Mağaza Güncellendi';
+                } else {
+                    message = 'Mağaza Eklendi';
+                }
             }
         } catch (err) {
             console .log("Hata:" + err.message)
