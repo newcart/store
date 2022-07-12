@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { DbEntity } from './entities/db.entity';
 import { CreateDbDto } from './dto/create-db.dto';
-import { newCartUtil } from "newcart/util";
+import { newCartUtil } from "newcart";
 
 @Injectable()
 export class DbService {
