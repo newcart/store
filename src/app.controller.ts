@@ -25,8 +25,17 @@ export class AppController {
   serviceTest( request ) {
     return this.appService.serviceTest( request );
   }
-  @MessagePattern('create')
-  create(request) {
-    return this.dbService.create(request['body']);
+
+  @MessagePattern('list')
+  list(request) {
+    return this.dbService.list(request['body']);
+  }
+  @MessagePattern('info')
+  info(request) {
+    return this.dbService.info(request['body']);
+  }
+  @MessagePattern('save')
+  save(request) {
+    return this.dbService.save(request['body']);
   }
 }

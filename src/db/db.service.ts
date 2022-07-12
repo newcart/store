@@ -12,11 +12,42 @@ export class DbService {
         private dbRepository: Repository<DbEntity>,
     ) {}
 
-    async create(store: CreateDbDto) {
+    async findStoreById (store_id: number): Promise<DbEntity>{
+        const selectedStore: DbEntity = await this.dbRepository.findOne({where: {store_id}})
+        return selectedStore
+    }
+
+    async info(data){
+        const id = data['id']
+        const store = await this.findStoreById (id)
+
+        var message = '';
+        if(store){
+            message = 'Başarılı'
+        } else {
+            message = 'Mağaza Bulunamadı'
+        }
+        return newCartUtil.response('success', message,  store)
+    }
+    async list (data){
+        const page = data['page']
+        const limit = data['limit']
+        const offset = page * limit
+        const [items, count] = await this.dbRepository.findAndCount({
+            order: {
+                store_id: 'ASC'
+            },
+            skip: offset,
+            take: limit
+        });
+        return newCartUtil.response('success', 'Başarılı',  {items, count})
+    }
+
+    async save(store: CreateDbDto) {
         var status = 'failure';
         var message = '';
         try {
-            store =await  this.dbRepository.save(store)
+            store = await this.dbRepository.save(store)
             if(store){
                 status = 'success';
                 message = 'Mağaza Eklendi';
@@ -29,16 +60,10 @@ export class DbService {
         }
         return newCartUtil.response(status, message,  store)
     }
-
-    async findStoreById (id: number): Promise<DbEntity>{
-        const selectedStore: DbEntity = await this.dbRepository.findOne({where: {id}})
-        return selectedStore
-    }
-
     async remove(id: number) {
         const store: DbEntity = await this.findStoreById(id);
         if(store){
-            this.dbRepository.delete(store.id);
+            this.dbRepository.delete(store.store_id);
         } else {
 
         }

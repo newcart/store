@@ -12,7 +12,7 @@ import { DbEntity } from './db/entities/db.entity'
         ConfigModule.forRoot({isGlobal:true}),
         TypeOrmModule.forRoot({
             type      : 'postgres',
-            schema    : 'newcart_v1',
+            schema    : process.env.POSTGRES_SCHEMA,
             host      : process.env.POSTGRES_HOST,
             port      : parseInt(<string>process.env.POSTGRES_PORT),
             username  : process.env.POSTGRES_USER,
