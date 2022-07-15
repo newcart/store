@@ -4,7 +4,9 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config'
 import { DbModule } from './db/db.module'
-import { DbEntity } from './db/entities/db.entity'
+import { CityEntity } from './db/entities/city.entity'
+import { StoreEntity } from './db/entities/store.entity'
+import { CountryEntity } from './db/entities/country.entity'
 
 @Module({
     imports: [
@@ -18,7 +20,7 @@ import { DbEntity } from './db/entities/db.entity'
             username  : process.env.POSTGRES_USER,
             password  : process.env.POSTGRES_PASSWORD,
             database  : process.env.POSTGRES_DATABASE,
-            entities  : [DbEntity],
+            entities  : [CityEntity, StoreEntity, CountryEntity],
             autoLoadEntities: true,
             synchronize: true,
             retryDelay :1

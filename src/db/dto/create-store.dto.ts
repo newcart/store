@@ -1,13 +1,13 @@
 import {IsNumber, IsString, IsDate, IsBoolean, IsInt} from 'class-validator';
 import {Column, CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
 
-export class CreateDbDto {
+export class CreateStoreDto {
     @IsNumber()
     readonly store_id: number;
     @IsNumber()
-    readonly store_code: number;
+    readonly code: string;
     @IsString()
-    readonly store_name: string;
+    readonly name: string;
     @IsString()
     readonly address: string;
     @IsNumber()

@@ -1,13 +1,13 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, BeforeInsert, OneToMany, JoinColumn, OneToOne } from 'typeorm';
 
 @Entity({ name: 'stores' })
-export class DbEntity {
+export class StoreEntity {
     @PrimaryGeneratedColumn()
     store_id: number;
     @Column({ unique: true })
-    store_code: number;
+    code: string;
     @Column()
-    store_name: string;
+    name: string;
     @Column({nullable:true})
     address: string;
     @Column({nullable:true})
@@ -28,7 +28,7 @@ export class DbEntity {
     telephone: string;
     @Column({nullable:true})
     image: string;
-    @CreateDateColumn({nullable:true})
+    @CreateDateColumn()
     created_at: Date;
     @UpdateDateColumn()
     updated_at: Date;
