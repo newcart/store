@@ -273,6 +273,25 @@ export class DbService {
                 }
             }
         }
+
+        newCartSetup.getMicroService().forEach(async function(item){
+            const service = <ServiceEntity>item
+            await  this.serviceSave(service)
+            console.log(`${service.name} Eklendi`)
+        }.bind(this))
+
+        newCartSetup.getUserTypes().forEach(async function(item){
+            const user_type = <UserTypeEntity>item
+            await this.userTypeSave(user_type)
+            console.log(`${user_type.name} Eklendi`)
+        }.bind(this))
+
+        newCartSetup.getUserRoles().forEach(async function(item){
+            const user_role = <UserRoleEntity>item
+            await this.userRoleSave(user_role)
+            console.log(`${user_role.name} Eklendi`)
+        }.bind(this))
+
         return newCartUtil.response('success', 'Veri Tabanı Hazırlandı',  {})
     }
     async findStoreById (store_id: number): Promise<StoreEntity>{
